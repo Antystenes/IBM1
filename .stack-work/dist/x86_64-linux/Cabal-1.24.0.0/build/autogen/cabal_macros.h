@@ -35,6 +35,13 @@
   (major1) == 1 && (major2) <  3 || \
   (major1) == 1 && (major2) == 3 && (minor) <= 2)
 
+/* package unordered-containers-0.2.7.1 */
+#define VERSION_unordered_containers "0.2.7.1"
+#define MIN_VERSION_unordered_containers(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  2 || \
+  (major1) == 0 && (major2) == 2 && (minor) <= 7)
+
 /* tool gcc-6.2.1 */
 #define TOOL_VERSION_gcc "6.2.1"
 #define MIN_TOOL_VERSION_gcc(major1,major2,minor) (\
@@ -91,7 +98,7 @@
   (major1) == 2 && (major2) <  27 || \
   (major1) == 2 && (major2) == 27 && (minor) <= 0)
 
-#define CURRENT_COMPONENT_ID "IBM1-0.1.0.0-CjjbeV2d7nS55Viqk1p5oC"
+#define CURRENT_COMPONENT_ID "IBM1-0.1.0.0-2Cy7pYQHi2RT2Zw6i7w81"
 
-#define CURRENT_PACKAGE_KEY "IBM1-0.1.0.0-CjjbeV2d7nS55Viqk1p5oC"
+#define CURRENT_PACKAGE_KEY "IBM1-0.1.0.0-2Cy7pYQHi2RT2Zw6i7w81"
 

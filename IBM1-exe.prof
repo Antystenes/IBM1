@@ -1,0 +1,132 @@
+	Tue Dec 13 21:30 2016 Time and Allocation Profiling Report  (Final)
+
+	   IBM1-exe +RTS -N -hc -p -RTS
+
+	total time  =        6.12 secs   (6121 ticks @ 1000 us, 1 processor)
+	total alloc = 2,337,024,432 bytes  (excludes profiling overheads)
+
+COST CENTRE                  MODULE        %time %alloc
+
+lookup                       Data.HashMap   25.2    8.6
+some_lookup                  Data.HashMap   24.0    0.0
+insertWith                   Data.HashMap   12.7   41.6
+!                            Data.HashMap    7.8    0.0
+insertWith.some_insert_with  Data.HashMap    6.3    7.5
+step.insertTotal             Lib             5.0    3.3
+step.insertCount             Lib             4.7    4.5
+step.\                       Lib             2.6    1.7
+mapWithKey.some_map_with_key Data.HashMap    2.2    4.5
+foldPair.\                   Lib             1.7    4.5
+foldPair.\.\                 Lib             1.6    7.0
+step.normalization.\         Lib             1.4    6.6
+foldPair                     Lib             1.3    3.3
+mapWithKey                   Data.HashMap    1.3    4.0
+step.(...)                   Lib             0.4    1.3
+
+
+                                                                                    individual      inherited
+COST CENTRE                                MODULE                no.     entries  %time %alloc   %time %alloc
+
+MAIN                                       MAIN                  122          0    0.0    0.0   100.0  100.0
+ main                                      Main                  245          0    0.0    0.0     0.0    0.0
+ CAF:main1                                 Main                  242          0    0.0    0.0     0.0    0.0
+  main                                     Main                  244          1    0.0    0.0     0.0    0.0
+ CAF:main2                                 Main                  241          0    0.0    0.0     0.0    0.0
+  main                                     Main                  246          0    0.0    0.0     0.0    0.0
+   showsPrec                               Data.HashMap          247          1    0.0    0.0     0.0    0.0
+    toList                                 Data.HashMap          249          1    0.0    0.0     0.0    0.0
+     toList.some_append                    Data.HashMap          278         10    0.0    0.0     0.0    0.0
+ CAF:main3                                 Main                  240          0    0.0    0.0    99.8   99.5
+  main                                     Main                  251          0    0.0    0.0    99.8   99.5
+   iterateTest                             Lib                   252          1    0.0    0.2    99.8   99.5
+    testloop                               Lib                   255          0    0.0    0.0    99.7   99.4
+     loop                                  Lib                   256          0    0.1    0.0    99.7   99.4
+      step                                 Lib                   257     100000    0.2    0.7    99.7   99.4
+       step.totals                         Lib                   309     100000    0.0    0.0     0.0    0.0
+       step.normalization                  Lib                   301     100000    0.0    0.0     0.0    0.0
+       step.counter                        Lib                   285     100000    0.0    0.0     0.0    0.0
+       step.(...)                          Lib                   284     100000    0.4    1.3    80.8   86.2
+        step.counter                       Lib                   286          0    0.3    0.0    80.4   84.9
+         foldPair                          Lib                   287     900000    1.3    3.3    80.2   84.9
+          foldPair.\                       Lib                   288    1800000    1.7    4.5    78.9   81.6
+           foldPair.\.\                    Lib                   289    3600000    1.6    7.0    77.1   77.1
+            step.normalization.\           Lib                   303    2400000    1.4    6.6    26.6   30.4
+             !                             Data.HashMap          306    2400000    2.7    0.0    17.0    1.6
+              lookup                       Data.HashMap          307    2400000    7.3    1.6    14.3    1.6
+               some_lookup                 Data.HashMap          308    2400000    7.0    0.0     7.0    0.0
+             insertWith                    Data.HashMap          304    2400000    5.0   18.1     8.1   22.2
+              insertWith.some_insert_with  Data.HashMap          305    1200000    3.1    4.1     3.1    4.1
+            step.inserter                  Lib                   290    1200000    0.7    0.0    48.9   39.7
+             step.insertTotal              Lib                   310    1200000    5.0    3.3    24.4   19.8
+              step.normalization           Lib                   316          0    0.0    0.0     0.0    0.0
+              !                            Data.HashMap          313    2400000    1.9    0.0    13.6    2.5
+               lookup                      Data.HashMap          314    2400000    5.8    2.5    11.7    2.5
+                some_lookup                Data.HashMap          315    2400000    5.9    0.0     5.9    0.0
+              insertWith                   Data.HashMap          311    1200000    3.5   11.3     5.9   14.0
+               insertWith.some_insert_with Data.HashMap          312     800000    2.4    2.7     2.4    2.7
+             step.insertCount              Lib                   291    1200000    4.7    4.5    23.9   20.0
+              step.normalization           Lib                   302          0    0.0    0.0     0.0    0.0
+              !                            Data.HashMap          294    2400000    1.9    0.0    14.2    2.5
+               lookup                      Data.HashMap          295    2400000    6.2    2.5    12.3    2.5
+                some_lookup                Data.HashMap          296    2400000    6.1    0.0     6.1    0.0
+              insertWith                   Data.HashMap          292    1200000    4.2   12.3     5.0   13.0
+               insertWith.some_insert_with Data.HashMap          318     200000    0.8    0.7     0.8    0.7
+       step.counts                         Lib                   283     100000    0.1    0.0     0.1    0.0
+       step                                Lib                   258     100000    0.0    0.2    18.5   12.4
+        mapWithKey                         Data.HashMap          259     100000    1.3    4.0    18.5   12.3
+         mapWithKey.some_map_with_key      Data.HashMap          279    1000000    2.2    4.5    17.2    8.2
+          step.\                           Lib                   280    1000000    2.6    1.7    15.0    3.8
+           !                               Data.HashMap          281    2000000    1.3    0.0    12.3    2.1
+            lookup                         Data.HashMap          282    2000000    5.9    2.1    11.0    2.1
+             some_lookup                   Data.HashMap          293    2000000    5.0    0.0     5.0    0.0
+ CAF:testProbs                             Lib                   238          0    0.0    0.0     0.0    0.0
+  testProbs                                Lib                   260          1    0.0    0.0     0.0    0.0
+   initProbs                               Lib                   261          1    0.0    0.0     0.0    0.0
+    initProbs.probs                        Lib                   297          1    0.0    0.0     0.0    0.0
+     extractDict                           Lib                   299          0    0.0    0.0     0.0    0.0
+      extractDict.\                        Lib                   300          3    0.0    0.0     0.0    0.0
+    initProbs.initializer                  Lib                   263          1    0.0    0.0     0.0    0.0
+     foldPair                              Lib                   264          3    0.0    0.0     0.0    0.0
+      foldPair.\                           Lib                   266          6    0.0    0.0     0.0    0.0
+       foldPair.\.\                        Lib                   267         12    0.0    0.0     0.0    0.0
+        initProbs.insertProbs              Lib                   268         12    0.0    0.0     0.0    0.0
+         insert                            Data.HashMap          269         12    0.0    0.0     0.0    0.0
+          insert.some_insert               Data.HashMap          317          2    0.0    0.0     0.0    0.0
+ CAF:testloop                              Lib                   237          0    0.0    0.0     0.2    0.4
+  testloop                                 Lib                   253          1    0.0    0.0     0.2    0.4
+   loop                                    Lib                   254     100000    0.2    0.4     0.2    0.4
+ CAF:extractDict                           Lib                   236          0    0.0    0.0     0.0    0.0
+  extractDict                              Lib                   298          1    0.0    0.0     0.0    0.0
+ CAF:testCorpus                            Lib                   235          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   262          1    0.0    0.0     0.0    0.0
+ CAF:testCorpus7                           Lib                   234          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   277          0    0.0    0.0     0.0    0.0
+ CAF:testCorpus11                          Lib                   233          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   276          0    0.0    0.0     0.0    0.0
+ CAF:testCorpus6                           Lib                   232          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   274          0    0.0    0.0     0.0    0.0
+ CAF:testCorpus10                          Lib                   231          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   275          0    0.0    0.0     0.0    0.0
+ CAF:testCorpus20                          Lib                   230          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   270          0    0.0    0.0     0.0    0.0
+ CAF:testCorpus14                          Lib                   229          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   273          0    0.0    0.0     0.0    0.0
+ CAF:testCorpus23                          Lib                   228          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   271          0    0.0    0.0     0.0    0.0
+ CAF:testCorpus16                          Lib                   227          0    0.0    0.0     0.0    0.0
+  testCorpus                               Lib                   272          0    0.0    0.0     0.0    0.0
+ CAF:$fShowMap1                            Data.HashMap          211          0    0.0    0.0     0.0    0.0
+  showsPrec                                Data.HashMap          248          0    0.0    0.0     0.0    0.0
+ CAF:ifoldr                                Data.HashMap          209          0    0.0    0.0     0.0    0.0
+  ifoldr                                   Data.HashMap          250          1    0.0    0.0     0.0    0.0
+ CAF:fromList1                             Data.HashMap          199          0    0.0    0.0     0.0    0.0
+  empty                                    Data.HashMap          265          1    0.0    0.0     0.0    0.0
+ CAF                                       GHC.IO.Handle.FD      172          0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.Event.Thread      171          0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.IO.Handle.Text    167          0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.Conc.Signal       161          0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.IO.Encoding       159          0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.Event.Poll        147          0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.Float             145          0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.Event.EPoll       142          0    0.0    0.0     0.0    0.0
+ CAF                                       GHC.IO.Encoding.Iconv 140          0    0.0    0.0     0.0    0.0

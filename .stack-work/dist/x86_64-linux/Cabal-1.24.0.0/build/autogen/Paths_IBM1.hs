@@ -30,7 +30,7 @@ version = Version [0,1,0,0] []
 bindir, libdir, datadir, libexecdir, sysconfdir :: FilePath
 
 bindir     = "/home/Programming/Haskell/TAU/IBM1/.stack-work/install/x86_64-linux/lts-7.12/8.0.1/bin"
-libdir     = "/home/Programming/Haskell/TAU/IBM1/.stack-work/install/x86_64-linux/lts-7.12/8.0.1/lib/x86_64-linux-ghc-8.0.1/IBM1-0.1.0.0-CjjbeV2d7nS55Viqk1p5oC"
+libdir     = "/home/Programming/Haskell/TAU/IBM1/.stack-work/install/x86_64-linux/lts-7.12/8.0.1/lib/x86_64-linux-ghc-8.0.1/IBM1-0.1.0.0-2Cy7pYQHi2RT2Zw6i7w81"
 datadir    = "/home/Programming/Haskell/TAU/IBM1/.stack-work/install/x86_64-linux/lts-7.12/8.0.1/share/x86_64-linux-ghc-8.0.1/IBM1-0.1.0.0"
 libexecdir = "/home/Programming/Haskell/TAU/IBM1/.stack-work/install/x86_64-linux/lts-7.12/8.0.1/libexec"
 sysconfdir = "/home/Programming/Haskell/TAU/IBM1/.stack-work/install/x86_64-linux/lts-7.12/8.0.1/etc"
