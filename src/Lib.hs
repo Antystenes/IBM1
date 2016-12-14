@@ -3,35 +3,24 @@ module Lib where
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Set as S
 import Text.Printf
+--import qualified Data.ByteString.Char8 as BS2
 --import Data.Hashable.Class.Hashable
 
-type Token = String
+type Token = String  -- BS2.ByteString
 type Dictionary = S.Set Token
 type Sentence = [Token]
 type SentencePair = (Sentence,Sentence)
 type Corpus = [SentencePair]
-type Probs = HM.HashMap (Token, Token) Float
-type Counts = HM.HashMap (Token, Token) Float
-type Totals = HM.HashMap Token Float
-
-testCorpus :: Corpus
-testCorpus =  [(["das","Haus"], ["the","House"]), (["das","Buch"],["the","book"]), (["ein","Buch"], ["a","book"])]
---testCorpus = map (\(f, e) -> (words f, words e)) [("Chcę wiedzieć", "Ne ne já bych to chtěl vědět"),
--- ("Ty zaczęłaś", "Ty jsi s tím vyrukovala"),
--- ("Kiedy przyjdzie do domu", "Kdypak přijde"),
--- ("Powiedziałam nieważne", "Povídám , dej s tím pokoj"),
--- ("Przepraszam , że z tym zaczęłam Z nim Nie z tym", "Mrzí mě , že jsem s tím vyrukovala"),
--- ("Ty go wychowałaś , mniej lub bardziej", "S ním , ne s tím S ním jsi vyrukovala"),
--- ("Kiedy przyjdzie mały gnój", "Kdypak se tady ten hajzlík objeví , co"),
--- ("Czy jutro nie są jego urodziny", "Nemá mít náhodou zítra narozeniny"),
--- ("Nie chcę o tym mówić", "Já o tom nechci mluvit"),
--- ("Ona nie chce o tym mówić , o nim", "To věřím , že nechceš")]
+type Probs = HM.HashMap (Token, Token) Double
+type Counts = HM.HashMap (Token, Token) Double
+type Totals = HM.HashMap Token Double
 
 readCorpus :: String -> String -> IO (Corpus)
 readCorpus filef filee = do
   fr <- readFile filef
   en <- readFile filee
-  return $ map (\(x,y) -> ("NULL":(words x), words y)) $ zipWith (\x y -> (x,y)) (lines fr) (lines en)
+  return $ map (\(x,y) -> ( "NULL":(words x), words y)) $ zipWith (\x y -> (x,y)) (lines fr) (lines en)
+--  return $ map (\(x,y) -> (map BS2.pack $ "NULL":(words x), map BS2.pack $ words y)) $ zipWith (\x y -> (x,y)) (lines fr) (lines en)
 
 initProbs :: Corpus -> Probs
 initProbs corpus = foldl initializer HM.empty corpus
@@ -54,7 +43,7 @@ step corpus probs = {-# SCC "step"#-} HM.mapWithKey (\k@(_,f) _ -> val k f) $ pr
         insertCount k x y ac =  HM.insertWith
                                        (+) -- operation
                                        (x,y) -- key
-                                       (((HM.!) probs (x,y)) / ((HM.!) (normalization k) x)) -- value to insert
+                                       (((HM.!) probs (x,y)) / ((HM.!) (normalization k) x)) -- value to add
                                        $ fst ac -- map
         insertTotal k x y ac =  HM.insertWith
                                        (+)
@@ -68,8 +57,9 @@ loop corpus = (step corpus):(loop corpus)
 iterations n corpus = foldr (.) id $ take n (loop corpus)
 
 showProbs :: Probs -> String
-showProbs = HM.foldrWithKey (\(e,f) a acc -> if a>0.001 then (unwords [f, e, (printf "%.4f\n" a)])++acc else acc) []
+showProbs = HM.foldrWithKey (\(e,f) a acc -> if a>0.001 then (unwords [f,e, (printf "%.4f\n" a)])++acc else acc) []
+--showProbs = HM.foldrWithKey (\(e,f) a acc -> if a>0.001 then (unwords [BS2.unpack f,BS2.unpack e, (printf "%.4f\n" a)])++acc else acc) []
 
-perplexity :: Corpus -> Probs -> Float
+perplexity :: Corpus -> Probs -> Double
 perplexity corpus probs = foldr (\k acc -> acc - (logBase 2 (prob k))) 0 corpus
   where prob (f,e) = foldr (\(x, y) ac -> ac * (probs HM.! (y,x))) 1 $ zip f e
